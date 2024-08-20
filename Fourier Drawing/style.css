@@ -1,0 +1,82 @@
+* {
+    padding: 0;
+    margin: 0;
+    color: aliceblue;
+    background-color: black;
+    transition: .5s;
+}
+
+body {
+    overflow: auto;
+}
+
+canvas {
+    border: 3px rgb(246, 246, 246) dashed;
+    border-radius: 20px;
+}
+
+.control {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 20px;
+    margin: 5px;
+}
+@media screen and (max-width: 800px) {
+    .control {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+.modes {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    gap: 5px;
+}
+
+.modes, .draw, .params {
+    border: 3px rgb(246, 246, 246) dashed;
+    border-radius: 20px;
+    padding: 10px;
+}
+
+.btn {
+    background-color: rgb(25, 24, 22);
+    border: 1px white solid;
+    border-radius: 10px;
+    padding: 5px;
+    cursor: pointer;
+}
+.btn:hover {
+    border-radius: 0;
+    background-color: rgb(7, 7, 49);
+}
+
+.check {
+    border: 1px white solid;
+    border-radius: 50%;
+}
+
+.plus-minus {
+    display: flex;
+    justify-content: space-between;
+    gap: 2px;
+}
+
+#b_p, #b_m {
+    flex: 1;
+    padding: 1px;
+}
+
+td {
+    padding-left: 10px;
+}
+
+#c_v {
+    width: 100px;
+    border: 1px white solid;
+    border-radius: 10px;
+    padding: 5px;
+}

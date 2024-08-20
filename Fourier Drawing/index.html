@@ -4,37 +4,69 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fourier Circles</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body style="margin: 0;">
+<body id="body">
+    <div class="canv">
+        <canvas id="MyCanvas"></canvas>
+    </div>
+    <div class="control">
+        <div class="modes">
+            <input class="btn" type="button", value="Draw mode / clear", onclick="setDrawing()">
+            <input class="btn" type="button", value="Apply / Reset", onclick="Apply()">
+            <input class="btn" type="button", value="Fourier portrait / Default", onclick="SetDefault()">
+        </div>
+        <div class="draw">
+            <table>
+                <tr>
+                    <td>circles value</td>
+                    <td><input type="tet", id="c_v", value="250"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td class="plus-minus">
+                        <input class="btn" id="b_p" type="button", value="+", onclick="Plus()">
+                        <input class="btn" id="b_m" type="button", value="-", onclick="Minus()">
+                    </td>
+                </tr>
+                <tr>
+                    <td>show target picture</td>
+                    <td><input class="check" type="checkbox", id="show_picture"></td>
+                </tr>
+                <tr>
+                    <td>show circles</td>
+                    <td><input class="check" type="checkbox", checked = "true", id="show_circles"></td>
+                </tr>
+                <tr>
+                    <td>show lines</td>
+                    <td><input class="check" type="checkbox", checked = "true", id="show_lines"></td>
+                </tr>
+                
+            </table>
+        </div>
+
+        <div class="params">
+            <table>
+                <tr>
+                    <td>zoom</td>
+                    <td><input type="range" name="range" id="zoom" min="0.1" max="10" step="0.1" value="1"></td>
+                </tr>
+                <tr>
+                    <td>speed</td>
+                    <td><input type="range" name="speed" id="speed" min="0.1" max="20" step="0.1" value="5"></td>
+                </tr>
+                <tr>
+                    <td>tip stabilize</td>
+                    <td><input class="check" type="checkbox", id="edgelock"></td>
+                </tr>
+                <tr>
+                    <td>instant line calculating</td>
+                    <td><input class="check" type="checkbox", id="inst_calc"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
     
-    <canvas id="MyCanvas" style="display: block; background-color: black;"></canvas>
-
-    <input type="button", value="Draw mode", onclick="setDrawing()">
-    Circles value: 
-    <input type="text", id="c_v", value="250">
-    <input type="button", value="+", onclick="Plus()">
-    <input type="button", value="-", onclick="Minus()">
-    <input type="button", value="Apply / Reset", onclick="Apply()">
-    <input type="checkbox", id="show_picture">
-    - Show target picture
-    <input type="checkbox", checked = "true", id="show_circles">
-    - Show circles
-    <input type="checkbox", checked = "true", id="show_lines">
-    - Show lines
-    <input type="checkbox", id="inst_calc">
-    - Instant line calculating
-
-    <p></p>
-    <input type="button", value="Fourier portrait / Default", onclick="SetDefault()">
-    <p></p>
-    Zoom: 
-    <input type="range" name="range" id="zoom" min="0.1" max="10" step="0.1" value="1"> 
-    Speed: 
-    <input type="range" name="speed" id="speed" min="0.1" max="20" step="0.1" value="5"> 
-    Tip stabilize: 
-    <input type="checkbox", id="edgelock">
-
     <script src="JS/script.js"></script>
-    
 </body>
 </html>

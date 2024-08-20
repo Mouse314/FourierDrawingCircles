@@ -19,9 +19,11 @@ var canv = /** @type {HTMLCanvasElement} */ (document.querySelector('#canvas'))
 canv = document.getElementById("MyCanvas");
 var ctx = canv.getContext("2d");
 
+var body = document.getElementById("body");
+
 //Inner graphics parameters
-canv.width = window.innerWidth;
-canv.height = window.innerHeight - 110;
+canv.width = window.innerWidth - 6;
+canv.height = window.innerHeight - 190;
 ctx.strokeStyle = "white";
 ctx.lineWidth = 0.5;
 var offset = [canv.width / 2, canv.height / 2];
@@ -70,6 +72,16 @@ for(var i = 0; i < picture.length; i++){
 circlesDraw(f_p);
 
 var i_line = Instant_Calc();
+
+window.addEventListener("resize", (e) => {
+    location.reload()
+});
+
+window.addEventListener("keydown", (e) => {
+    if(e.code == "Enter"){
+        Apply();
+    }
+});
 
 //Interval main function
 var interval = setInterval(draw, 10);
@@ -239,15 +251,17 @@ canv.addEventListener("mouseup", function(e){
     IsMouseDown = false;
 });
 
+
+
 canv.addEventListener("mousemove", function(e){
     if(IsDrawingMode && IsMouseDown){
-        draw_pic.push([e.x, e.y]);
-        ctx.lineTo(e.x, e.y);
+        draw_pic.push([e.pageX, e.pageY]);
+        ctx.lineTo(e.pageX, e.pageY);
         ctx.stroke();
         ctx.beginPath();
-        ctx.moveTo(e.x, e.y);
+        ctx.moveTo(e.pageX, e.pageY);
     }
-
+    
     if(!IsDrawingMode && IsMouseDown){
         mousepos = [mousepos[0] - e.x, mousepos[1] - e.y];
         offset[0] -= mousepos[0];
@@ -259,10 +273,43 @@ canv.addEventListener("mousemove", function(e){
     mousepos = [e.x, e.y];
 });
 
+canv.addEventListener("touchstart", function(e){
+    body.style.overflow = "hidden";
+});
+canv.addEventListener("touchend", function(e){
+    body.style.overflow = "auto";
+});
+
+canv.addEventListener("touchmove", function(e){
+    body.style.overflow = "hidden";
+
+    let _x = e.changedTouches[0].pageX;
+    let _y = e.changedTouches[0].pageY;
+
+    if(IsDrawingMode){
+        draw_pic.push([_x, _y]);
+        ctx.lineTo(_x, _y);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(_x, _y);
+    }
+    
+    if(!IsDrawingMode){
+        mousepos = [mousepos[0] - _x, mousepos[1] - _y];
+        offset[0] -= mousepos[0];
+        offset[1] -= mousepos[1];
+        picture = PicOffset(picture, mousepos);
+        line_track = PicOffset(line_track, mousepos);
+        i_line = PicOffset(i_line, mousepos);
+    }
+    mousepos = [_x, _y];
+    console.log(mousepos);
+});
 
 function setDrawing(){
     IsDrawingMode = true;
     draw_pic = [];
+    document.getElementById("c_v").value = "1"
     clear();
 }
 
